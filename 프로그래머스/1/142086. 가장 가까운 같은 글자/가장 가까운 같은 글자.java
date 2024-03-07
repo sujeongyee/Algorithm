@@ -1,11 +1,10 @@
-import java.util.List;
-import java.util.ArrayList;
+
 class Solution {
     public int[] solution(String s) {
         StringBuilder sb = new StringBuilder(s);
-		List<Integer> list = new ArrayList<>();
+		int[] list = new int[s.length()];
 		int index = -1;
-		list.add(-1);
+		list[0] = -1;
 		for(int i = 1 ; i < sb.length() ; i++) {
 			for(int j = i-1 ; j >=0 ; j--) {
 				if(sb.charAt(i)==sb.charAt(j)) {
@@ -13,9 +12,9 @@ class Solution {
 					break;
 				}
 			}
-			list.add(index);
+			list[i]=index;
 			index = -1;
 		}
-        return list.stream().mapToInt(i->i).toArray();
+        return list;
     }
 }

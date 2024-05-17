@@ -1,28 +1,24 @@
 import java.util.*;
 class Solution {
     public int[] solution(int l, int r) {
-        int[] answer = {};
-        ArrayList<Integer> list = new ArrayList<>();
-        int a = 0;
-        for(int i = l; i <= r; i++) {
-            String num =  String.valueOf(i);
-            String[] nums = num.split("");
-            int numLength =  nums.length;
-            int count = 0;
-                for (int j = 0; j < numLength; j++) {
-                    if (nums[j].equals("0") || nums[j].equals("5")) {
-                        count++;
-                    }
-                }
-                if(count == numLength) {
-                    list.add(i);
-                }
-            }
-        answer = list.stream().mapToInt(Integer::intValue).toArray();
-        if(answer.length == 0) {
-           answer = new int[] {-1};
+        Set<Integer> set = new TreeSet<Integer>();
+		for(int i = l ; i<=r ; i++) {
+			if(i%5!=0) continue;
+			else {
+				int len = String.valueOf(i).replace("0", "").replace("5", "").length();
+				if(len==0) set.add(i);		
+			}			
+		}
+		
+		if(set.size()==0) return new int[]{-1};
+		else {
+			int idx = 0;
+			int[] answer = new int[set.size()];
+			for(int a : set) {
+				answer[idx] = a;
+				idx++;
+			}
             return answer;
-        }
-        return answer;
+		}        
     }
 }
